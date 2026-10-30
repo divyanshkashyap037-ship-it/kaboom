@@ -1,0 +1,117 @@
+.modal-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 48, 82, 0.40);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: modal-fade 0.22s ease;
+}
+
+@keyframes modal-fade { from { opacity: 0; } }
+@keyframes modal-pop {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+}
+
+.task-modal {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: calc(100svh - 40px);
+  overflow-y: auto;
+  background: var(--glass-elevated);
+  border: 1px solid var(--glass-border);
+  border-radius: 26px;
+  box-shadow: var(--shadow-lift);
+  animation: modal-pop 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.modal-head {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 22px 12px;
+  background: var(--glass-elevated);
+}
+
+.modal-head h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  font-size: 18px;
+  color: var(--ink-1);
+}
+
+.modal-head h2 svg { color: var(--accent); }
+
+.modal-body { padding: 4px 22px 8px; }
+
+.modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 22px 20px;
+}
+
+/* ---------- fields ---------- */
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+
+.field label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.field input,
+.field select,
+.field textarea {
+  border: 1px solid var(--glass-border);
+  background: var(--glass-inset);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--ink-1);
+  outline: 0;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.field input.invalid { border-color: var(--danger); box-shadow: 0 0 0 3px var(--danger-soft); }
+
+.field-error {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--danger);
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 14px;
+}
+
+@media (max-width: 520px) {
+  .field-grid { grid-template-columns: 1fr; }
+}

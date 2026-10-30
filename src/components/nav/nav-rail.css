@@ -1,0 +1,209 @@
+/* A discreet charcoal tool rail, with the page itself remaining the star. */
+.nav-rail {
+  position: fixed;
+  z-index: 40;
+  top: 18px;
+  bottom: 18px;
+  left: 18px;
+  width: 52px;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 10px;
+  background: var(--glass-rail);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.50);
+  box-shadow: 0 14px 34px rgba(26, 90, 144, 0.24);
+  -webkit-backdrop-filter: blur(18px) saturate(1.1);
+  backdrop-filter: blur(18px) saturate(1.1);
+  overflow: hidden;
+  transition:
+    width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.nav-rail.open {
+  width: 258px;
+  background: var(--glass-elevated);
+  box-shadow: 0 18px 38px rgba(26, 90, 144, 0.26);
+}
+
+/* ---------- top toggle ---------- */
+.rail-toggle {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #52718a;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.rail-toggle svg { transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1); }
+
+.rail-toggle.peek,
+.rail-toggle:hover { background: rgba(255, 255, 255, 0.46); color: #244761; }
+
+.rail-toggle.open svg { transform: rotate(180deg); }
+
+/* ---------- items ---------- */
+.rail-items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+.rail-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 32px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 14px;
+  cursor: pointer;
+  color: #4f6f89;
+  transition:
+    width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.25s ease,
+    transform 0.2s ease,
+    color 0.25s ease;
+}
+
+.rail-item:hover {
+  background: rgba(255, 255, 255, 0.46);
+  color: #244761;
+}
+
+.rail-item:active { transform: scale(0.96); }
+
+/* ---------- active: flat, no glow ---------- */
+.rail-item.active {
+  background: rgba(255, 255, 255, 0.82);
+  color: #244761;
+  box-shadow: none;
+}
+
+.rail-item.active .rail-icon { color: inherit; }
+
+/* brand-name styles removed — no logo in the rail */
+
+.rail-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: inherit;
+}
+
+.nav-rail.open .rail-item {
+  width: 100%;
+  padding: 0 12px 0 8px;
+}
+
+.nav-rail.open .rail-icon {
+  position: static;
+  width: 24px;
+  height: 44px;
+  flex: none;
+}
+
+.rail-label {
+  flex: 1;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.22s ease 0.05s, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+  pointer-events: none;
+}
+
+.nav-rail.open .rail-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---------- top toggle spacing ---------- */
+.rail-toggle { margin-bottom: 6px; flex: none; }
+.nav-rail.open .rail-toggle { margin-bottom: 10px; }
+
+.rail-badge {
+  flex: none;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #74b5e6;
+  color: #163c5a;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.rail-item.active .rail-badge {
+  background: #347db6;
+  color: #f7fbff;
+}
+
+body.dark .rail-item.active { color: #25231f; }
+
+/* ---------- mobile drawer ---------- */
+.rail-backdrop {
+  position: fixed;
+  z-index: 39;
+  inset: 0;
+  background: rgba(29, 28, 25, 0.4);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  animation: backdrop-in 0.25s ease;
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 720px) {
+  .nav-rail {
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    transform: translateX(-130%);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), width 0.42s ease;
+    width: 264px;
+  }
+
+  .nav-rail.open {
+    transform: translateX(0);
+    width: 264px;
+  }
+
+  /* Mobile drawer is always in expanded layout */
+  .rail-icon,
+  .nav-rail.open .rail-icon {
+    position: static;
+    width: 24px;
+  }
+
+  .rail-item { width: 100%; padding: 0 12px 0 8px; }
+  .rail-label, .nav-rail.open .rail-label {
+    opacity: 1;
+    transform: none;
+  }
+}

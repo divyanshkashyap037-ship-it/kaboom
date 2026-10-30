@@ -1,0 +1,131 @@
+:root {
+  /* Quiet studio palette: paper, ink, and small doses of color. */
+  --sky-top: #8cc8f0;
+  --sky-mid: #6eafe0;
+  --sky-bottom: #4d91ca;
+
+  /* Glass */
+  --glass-rail: rgba(232, 245, 255, 0.42);
+  --glass-page: rgba(250, 253, 255, 0.86);
+  --glass-surface: #f9fcff;
+  --glass-card: #fffefd;
+  --glass-elevated: rgba(235, 247, 255, 0.78);
+  --glass-border: rgba(125, 178, 219, 0.28);
+  --glass-inset: #eef7fd;
+
+  /* Ink */
+  --ink-1: #24394d;
+  --ink-2: #5f7588;
+  --ink-3: #8b9eae;
+  --ink-inverse: #f7fbff;
+
+  /* Semantic */
+  --accent: #347db6;
+  --accent-deep: #205b8d;
+  --accent-soft: rgba(52, 125, 182, 0.14);
+  --danger: #b75548;
+  --danger-soft: rgba(183, 85, 72, 0.12);
+  --warning: #bc852d;
+  --warning-soft: rgba(188, 133, 45, 0.14);
+  --success: #49765b;
+  --success-soft: rgba(73, 118, 91, 0.13);
+
+  /* Priority */
+  --prio-low: #4dab77;
+  --prio-medium: #e59a2f;
+  --prio-high: #e2574c;
+
+  --radius-xl: 30px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  --rail-w: 74px;
+  --content-gap: 10px;
+  --page-pad: 26px 30px;
+
+  --shadow-soft: 0 12px 28px rgba(61, 56, 48, 0.045);
+  --shadow-lift: 0 16px 34px rgba(49, 44, 37, 0.12);
+
+  --font: Inter, 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body.dark {
+  --sky-top: #282722;
+  --sky-mid: #24231f;
+  --sky-bottom: #1d1c19;
+
+  --glass-rail: rgba(29, 28, 25, 0.98);
+  --glass-page: rgba(36, 35, 31, 0.78);
+  --glass-surface: #24231f;
+  --glass-card: #2c2a25;
+  --glass-elevated: #37342e;
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --glass-inset: #34312b;
+
+  --ink-1: #f4efe6;
+  --ink-2: #c9c1b5;
+  --ink-3: #999286;
+
+  --accent: #a7c3a5;
+  --accent-deep: #76977a;
+  --accent-soft: rgba(167, 195, 165, 0.16);
+
+  --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.10);
+  --shadow-lift: 0 16px 34px rgba(0, 0, 0, 0.28);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #6eafe0;
+  font-family: var(--font);
+  color: var(--ink-1);
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+::selection { background: rgba(63, 142, 224, 0.3); }
+
+/* ---------- Shader page backdrop ---------- */
+.shader-page {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--sky-mid);
+  background-image:
+    linear-gradient(120deg, rgba(27, 109, 181, 0.32) 0%, rgba(127, 193, 235, 0.11) 50%, rgba(25, 92, 152, 0.25) 100%),
+    url('/Windmills.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* ---------- scrollbars inside glass ---------- */
+.glass-scroll::-webkit-scrollbar { width: 10px; }
+.glass-scroll::-webkit-scrollbar-thumb {
+  background: rgba(112, 104, 91, 0.28);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.glass-scroll::-webkit-scrollbar-thumb:hover { background: rgba(112, 104, 91, 0.48); background-clip: content-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+  }
+}

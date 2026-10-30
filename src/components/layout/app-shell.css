@@ -1,0 +1,100 @@
+.app-shell {
+  height: 100svh;
+  padding: 18px 22px 18px 88px;
+  transition: padding 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.app-shell.rail-open { padding-left: 296px; }
+
+.page-panel {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--glass-page);
+  border: 1px solid rgba(255, 255, 255, 0.66);
+  border-radius: 24px;
+  box-shadow: 0 18px 44px rgba(30, 101, 158, 0.24);
+  -webkit-backdrop-filter: blur(18px) saturate(1.05);
+  backdrop-filter: blur(18px) saturate(1.05);
+}
+
+/* ---------- header ---------- */
+.page-head {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px 34px 18px;
+  background: linear-gradient(to bottom, var(--glass-page) 78%, transparent);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.page-head-text h1 {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 740;
+  letter-spacing: -0.035em;
+  color: var(--ink-1);
+}
+
+.page-head-text p {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  color: var(--ink-3);
+}
+
+.page-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+}
+
+.mobile-menu-btn {
+  display: none;
+  position: absolute;
+  left: 16px;
+  top: 20px;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid var(--glass-border);
+  border-radius: 13px;
+  color: var(--ink-1);
+  z-index: 20;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .app-shell,
+  .app-shell.rail-open { padding: 10px; }
+
+  .page-head { padding: 18px 18px 12px 66px; }
+  .page-head-text { min-width: 0; }
+  .page-head-text h1 { font-size: 21px; }
+  .page-head-actions { align-self: flex-end; }
+
+  .mobile-menu-btn { display: grid; }
+}
+
+.page-body {
+  padding: 8px 34px 34px;
+  min-height: 60%;
+}
+
+@media (max-width: 720px) {
+  .page-body { padding: 4px 18px 24px; }
+}
+
+@media (max-width: 520px) {
+  .page-head { gap: 8px; padding-right: 14px; }
+  .page-head-text p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .page-head-actions { margin-left: auto; }
+  .page-head-actions .btn { width: 38px; padding: 0; justify-content: center; font-size: 0; gap: 0; }
+  .page-head-actions .btn svg { width: 17px; height: 17px; }
+}

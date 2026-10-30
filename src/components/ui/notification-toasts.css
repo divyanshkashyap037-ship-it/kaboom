@@ -1,0 +1,90 @@
+.toast-region {
+  position: fixed;
+  z-index: 80;
+  top: 24px;
+  right: 28px;
+  display: grid;
+  width: min(360px, calc(100vw - 32px));
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) 26px;
+  gap: 10px;
+  align-items: start;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 17px;
+  background: rgba(250, 253, 255, 0.90);
+  box-shadow: 0 16px 36px rgba(30, 101, 158, 0.22);
+  -webkit-backdrop-filter: blur(18px) saturate(1.12);
+  backdrop-filter: blur(18px) saturate(1.12);
+  pointer-events: auto;
+  animation: toast-enter 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.toast-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.toast-warning .toast-icon { background: var(--warning-soft); color: var(--warning); }
+.toast-danger .toast-icon { background: var(--danger-soft); color: var(--danger); }
+
+.toast-copy { min-width: 0; }
+.toast-copy strong { display: block; margin: 1px 0 3px; color: var(--ink-1); font-size: 13px; font-weight: 750; }
+.toast-copy p { margin: 0; color: var(--ink-2); font-size: 12px; line-height: 1.45; }
+
+.toast-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  margin: 8px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent-deep);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.toast-action:hover { color: var(--accent); }
+
+.toast-dismiss {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+}
+
+.toast-dismiss:hover { background: var(--glass-inset); color: var(--ink-1); }
+
+body.dark .toast {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(35, 48, 62, 0.92);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.30);
+}
+
+@keyframes toast-enter {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 720px) {
+  .toast-region { top: 16px; right: 16px; }
+}
